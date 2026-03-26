@@ -54,7 +54,7 @@ function formatTimeUTC8(ts) {
   return new Date(ts + 8 * 3600000).toISOString().replace('T', ' ').slice(0, 19);
 }
 
-async function sendTG(statusIcon, statusText, extra, imagePath, force = false) {
+async function sendTG(statusIcon, statusText, extra, imagePath, force = true) {
   if (muteTg && !force) {
     console.log(`🔇 屏蔽TG通知 (${statusText}): 未到下次检查时间`);
     return;

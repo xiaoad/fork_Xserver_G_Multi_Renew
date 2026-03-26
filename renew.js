@@ -103,7 +103,7 @@ function checkScheduling() {
   }
 
   if (now < nextTime) {
-    muteTg = false; // 只要没到下次时间，不管是定时还是手动运行，都静默TG通知 (除非 force = true 强行覆盖)
+    muteTg = true; // 只要没到下次时间，不管是定时还是手动运行，都静默TG通知 (除非 force = true 强行覆盖)
     console.log('⏳ 预约 ' + formatTimeUTC8(nextTime) + '，没到下次检查时间');
 
     if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.CRON === 'true') {

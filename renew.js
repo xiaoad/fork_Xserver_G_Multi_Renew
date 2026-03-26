@@ -54,7 +54,7 @@ function formatTimeUTC8(ts) {
   return new Date(ts + 8 * 3600000).toISOString().replace('T', ' ').slice(0, 19);
 }
 
-async function sendTG(statusIcon, statusText, extra, imagePath, force = true) {
+async function sendTG(statusIcon, statusText, extra, imagePath, force = false) {
   if (muteTg && !force) {
     console.log(`🔇 屏蔽TG通知 (${statusText}): 未到下次检查时间`);
     return;
@@ -103,7 +103,7 @@ function checkScheduling() {
   }
 
   if (now < nextTime) {
-    muteTg = true; // 只要没到下次时间，不管是定时还是手动运行，都静默TG通知 (除非 force = true 强行覆盖)
+    muteTg = false; // 只要没到下次时间，不管是定时还是手动运行，都静默TG通知 (除非 force = true 强行覆盖)
     console.log('⏳ 预约 ' + formatTimeUTC8(nextTime) + '，没到下次检查时间');
 
     if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.CRON === 'true') {
